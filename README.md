@@ -1,0 +1,2 @@
+# easydox
+Professional specification generation
