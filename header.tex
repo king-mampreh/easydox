@@ -1,0 +1,268 @@
+% Copyright (c) King Mampreh OJSC. All rights reserved.
+% Licensed under the MIT License.
+
+% Latex header for doxygen 1.8.13
+\documentclass[a4paper,10pt,oneside]{book}
+
+% Packages required by doxygenusepackage{tocloft}
+\usepackage[tocflat]{tocstyle}
+\usetocstyle{standard}
+\usepackage{calc}
+\usepackage{doxygen}
+\usepackage[export]{adjustbox} % also loads graphicx
+\usepackage[utf8]{inputenc}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{multirow}
+\PassOptionsToPackage{warn}{textcomp}
+\usepackage{textcomp}
+\usepackage[nointegrals]{wasysym}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
+\usepackage[ddmmyyyy]{datetime}
+\usepackage{lastpage}
+\usepackage{draftwatermark}
+\SetWatermarkText{Confidential}
+\SetWatermarkFontSize{4cm}
+\SetWatermarkScale{1}
+\SetWatermarkLightness{0.88}
+
+% Font and color selection
+\usepackage[T1]{fontenc}
+\renewcommand{\rmdefault}{phv} % Arial
+\renewcommand{\sfdefault}{phv} % Arial
+\usepackage{tabu}
+\usepackage{tabulary}
+\usepackage[newcommands]{ragged2e}
+\usepackage{courier}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{color, colortbl}%this package is used to set color of table head
+\definecolor{headerfootergrey}{rgb}{0.568, 0.568, 0.568}
+\renewcommand{\familydefault}{\sfdefault}
+\allsectionsfont{%
+  \fontseries{bc}\selectfont%
+}
+\renewcommand{\DoxyLabelFont}{%
+  \fontseries{bc}\selectfont%
+}
+\newcommand{\+}{\discretionary{\mbox{\scriptsize$\hookleftarrow$}}{}{}}
+\newcommand{\headerkey}{%
+    \fontsize{7}{9}\selectfont
+}
+\newcommand{\headervalue}{%
+    \fontsize{8}{10}\selectfont
+}
+\renewcommand{\dateseparator}{/}
+
+% Listings
+\usepackage{bera} % for listings
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{stringcolor}{RGB}{125,39,39}
+\definecolor{codeexamplebg}{RGB}{249,249,249}
+\definecolor{directivecolor}{RGB}{133,140,147}
+\definecolor{keywordcolor}{RGB}{16,16,148}
+
+\lstset{ %
+  language=C++,                            % the language of the code
+  basicstyle=\footnotesize\fontfamily{fvm}\selectfont,       % the size of the fonts that are used for the code
+  numbers=left,                            % where to put the line-numbers
+  numberstyle=\tiny\color{gray},           % the style that is used for the line-numbers
+  stepnumber=1,                            % the step between two line-numbers. If it's 1, each line
+                                           % will be numbered
+  numbersep=5pt,                           % how far the line-numbers are from the code
+  backgroundcolor=\color{codeexamplebg},   % choose the background color. You must add \usepackage{color}
+  showspaces=false,                        % show spaces adding particular underscores
+  showstringspaces=false,                  % underline spaces within strings
+  showtabs=false,                          % show tabs within strings adding particular underscores
+  frame=single,                            % adds a frame around the code
+  rulecolor=\color{black},                 % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=4,                               % sets default tabsize to 2 spaces
+  captionpos=t,                            % sets the caption-position to bottom
+  breaklines=true,                         % sets automatic line breaking
+  breakatwhitespace=false,                 % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                          % show the filename of files included with \lstinputlisting;
+                                           % also try caption instead of title
+  keywordstyle=\color{keywordcolor},       % keyword style
+  commentstyle=\color{dkgreen}\itshape,    % comment style
+  stringstyle=\color{stringcolor},         % string literal style
+  directivestyle=\color{directivecolor},
+  escapeinside={\%*}{*)},                  % if you want to add a comment within your code
+  morekeywords={*,...},                    % if you want to add more keywords to the set
+  emph={int,char,double,float,unsigned},
+  emphstyle={\color{blue}}
+}
+
+\usepackage{caption}
+\DeclareCaptionFormat{listing}{{\parbox{\textwidth}{Example:}}}
+\captionsetup[lstlisting]{format=listing}
+
+% Page & text layout
+\usepackage{geometry}
+\geometry{%
+  a4paper,%
+  top=3cm,%
+  bottom=2.5cm,%
+  left=2.5cm,%
+  right=2.5cm%
+}
+\tolerance=750
+\hfuzz=15pt
+\hbadness=750
+\setlength{\emergencystretch}{15pt}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{3ex plus 2ex minus 2ex}
+\makeatletter %remove odd spaces before chapters
+\patchcmd{\@makechapterhead}{50\p@}{0pt}{}{}
+\patchcmd{\@makeschapterhead}{50\p@}{0pt}{}{}
+\makeatother
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{++4}{0ex}{-1.0ex}{1.0ex}{%
+    \normalfont\normalsize\bfseries\SS@parafont%
+  }%
+}
+\renewcommand{\subparagraph}{%
+  \@startsection{subparagraph}{5}{0ex}{-1.0ex}{1.0ex}{%
+    \normalfont\normalsize\bfseries\SS@subparafont%
+  }%
+}
+\makeatother
+
+%%% Macro to disable watermark
+\makeatletter
+\def\watermarkoff{%
+        \@sc@wm@stampfalse
+}
+\makeatother
+
+%%% Macro to enable watermark
+\makeatletter
+\def\watermarkon{%
+        \@sc@wm@stamptrue
+}
+\makeatother
+\renewcommand{\contentsname}{Table of Contents} %this changes TOC name
+% Headers & footers
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\lhead {%
+  \renewcommand{\arraystretch}{2}
+  \begin{tabular}{ r p{7cm} p{3cm}  r p{1cm} }
+      \headerkey {Document title} & \headervalue {\textbf{\xtitle}} & & \headervalue {\textbf{\today}} & \headerkey {Date} \\
+      \headerkey {Version} & \headervalue {\textbf{\xversion}} & & \headervalue {\textbf{\thepage}\ of \textbf{\hypersetup{linkcolor=black}\pageref{LastPage}}} & \headerkey {Page}
+  \end{tabular}
+}
+
+\lfoot {\headervalue \textcolor {headerfootergrey}{©2020 King Mampreh OJSC, all rights reserved\\Highly Confidential Document only for assigned personnel}}
+%page footer for title page
+\fancypagestyle{firstpage}{%
+  \fancyhead{}
+  \fancyfoot{}
+  \lfoot {\headervalue \textcolor {headerfootergrey}{©2020 King Mampreh OJSC, all rights reserved\\Highly Confidential Document only for assigned personnel}}
+
+}
+\renewcommand{\footrulewidth}{0pt} %this two lines hide the black lines from the page
+\renewcommand{\headrulewidth}{0pt}
+\makeatletter
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{fancy}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+\makeatother
+\renewcommand{\chaptermark}[1]{%
+  \markboth{#1}{}%
+}
+\renewcommand{\sectionmark}[1]{%
+  \markright{\thesection\ #1}%
+}
+\makeatletter
+\newcommand\HUGE{\@setfontsize\Huge{32}{47}}
+\makeatother
+% Indices & bibliography
+\usepackage{natbib}
+\usepackage[titles]{tocloft}
+\addtolength{\cftsecnumwidth}{10pt}
+\setcounter{tocdepth}{3} %configure the contents numbering
+\setcounter{secnumdepth}{5}
+\makeindex
+% Hyperlinks (required, but should be loaded last)
+\usepackage{ifpdf}
+\ifpdf
+  \usepackage[pdftex,pagebackref=false]{hyperref}
+\else
+  \usepackage[ps2pdf,pagebackref=false]{hyperref}
+\fi
+\hypersetup{%
+  colorlinks=true,%
+  linkcolor=cyan,%
+  citecolor=cyan,%
+  urlcolor=cyan,%
+  linktocpage=false,%
+  unicode%
+}
+
+% Custom commands
+\newcommand{\clearemptydoublepage}{%
+  \newpage{\pagestyle{empty}\cleardoublepage}%
+}
+
+\usepackage{caption}
+\captionsetup{labelsep=space,justification=centering,font={bf},singlelinecheck=off,skip=4pt,position=top}
+%===== C O N T E N T S =====
+\begin{document}
+% Titlepage & ToC
+\hypersetup{pageanchor=false,
+             bookmarksnumbered=true,
+             pdfencoding=unicode
+}
+\begin{titlepage}
+\watermarkoff
+\thispagestyle{firstpage}
+\begin{flushright}
+\noindent\makebox[\textwidth][r]{\rule{\paperwidth}{4pt}}\\
+\vspace*{1.5cm}
+\linespread{1}\selectfont
+{\HUGE \textbf{\xtitle}}\\
+\linespread{5}\selectfont
+{\huge \textbf{of}}\\
+{\HUGE \textbf{\xproject}}\\
+{\Large \textbf{Version {\xversion}}}\\
+{\Large \textbf{No. {\xnumber}}}\\
+{\Large \textbf{King Mampreh OJSC}}\\
+{\Large \textbf{\today}}\\
+\linespread{1}\selectfont
+\end{flushright}
+\end{titlepage}
+\newpage
+\newgeometry{%
+  includehead,%
+  headheight=61pt,%
+  top=3cm,%
+  bottom=2.2cm,%
+  left=2.5cm,%
+  right=2.5cm,%
+}
+\addtolength{\voffset}{-25pt}
+\begin{flushleft}
+\vspace*{1cm}
+{\Large \textbf{Revision History}}\\
+\vspace*{0.5cm}
+\begin{longtable}{|l|l|p{5cm}|l|}
+\hline
+\input{RevisionHistory}
+\end{longtable}
+\end{flushleft}
+\addtocounter{page}{0}
+\hypersetup{pageanchor=true}
+{\hypersetup{linkcolor=black}
+ \tableofcontents
+}
+%--- Begin generated contents ---
