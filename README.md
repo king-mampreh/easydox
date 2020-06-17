@@ -12,11 +12,10 @@ Please repeat this steps.
 2. Open MSYS2 command shell.
 3. Run `pacman -S doxygen` in MSYS command shell to install doxygen.
 4. Run `pacman -S make` in MSYS command shell to install make.
-5. Download [TexLive](http://mirror.ctan.org/systems/texlive/tlnet/install-tl-windows.exe) and install it.
-6. Go to inside the main project directory `easydox` and run `./generate_dox.sh`.
+5. Install MiKTeX,from [here](https://miktex.org/download/ctan/systems/win32/miktex/setup/windows-x64/basic-miktex-2.9.7442-x64.exe).
+6. Run `export PATH=$PATH:"/C/Program Files/MiKTeX 2.9/miktex/bin/x64"` in MSYS command shell to add MiKTeX PATH.
+7. Close and reopen MSYS command shell.
    
-
-
 
 ### Linux
 1. Open a terminal.
@@ -24,11 +23,6 @@ Please repeat this steps.
 3. Run `sudo apt-get install make`, to install make
 4. Run `sudo apt-get install texlive-latex-extra`, to install Texlive.
 5. Run `sudo apt-get install textlive-fonts-extra`, to install all fonts.
-6. Go to inside the main project directory `easydox` and run `./generate_dox.sh`.
 
 
-To see the generated pdf
 
-1. Go to `easydox` file directory
-2. `cd Dox\output`
-3. `evince <fileName>`
