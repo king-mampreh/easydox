@@ -40,7 +40,7 @@ if [ ! -d $DOX_DIR ]; then
   DOX_DIR="$CURRENT_DIR/dox"
 fi
 
-OUTPUT_DIR="$DOX_DIR/output"
+OUTPUT_DIR="$DOX_DIR/dist"
 
 # Remove Doxyfile.tmp just in case
 rm -f $DOXYFILE_TMP
