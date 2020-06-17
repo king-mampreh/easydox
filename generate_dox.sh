@@ -132,7 +132,13 @@ find $DOX_DIR -type f -name 'Doxyfile' -print0 |  while IFS= read -r -d $'\0' DO
     $SED '/\\begin{DoxyCode}/,/\\end{DoxyCode}/s/\\}/}/g' $TEXFILE # Replace `\}` to `}`
     $SED '/\\begin{DoxyCode}/,/\\end{DoxyCode}/s/\\_/_/g' $TEXFILE # Replace `\_` to `_`
     $SED '/\\begin{DoxyCode}/,/\\end{DoxyCode}/s/\\#/#/g' $TEXFILE # Replace `\#` to `#`
+    $SED '/\\begin{DoxyCode}/,/\\end{DoxyCode}/s/\\\$/\$/g' $TEXFILE # Replace `\$` to `$`
+    $SED '/\\begin{DoxyCode}/,/\\end{DoxyCode}/s/\\%/%/g' $TEXFILE # Replace `\%` to `%`
+    $SED '/\\begin{DoxyCode}/,/\\end{DoxyCode}/s/\\\&/\&/g' $TEXFILE # Replace `\&` to `&`
+    $SED '/\\begin{DoxyCode}/,/\\end{DoxyCode}/s/-\\\//-/g' $TEXFILE # Replace `-\/` to `-`
     $SED '/\\begin{DoxyCode}/,/\\end{DoxyCode}/s/\\(\\backslash\\)/\\/g' $TEXFILE # Replace `\(\backslash\)` to `\`
+    $SED '/\\begin{DoxyCode}/,/\\end{DoxyCode}/s/^\\DoxyCodeLine{\(.*\)}/\1/g' $TEXFILE # Remove \DoxyCodeLine{}
+
 
   done
   make
